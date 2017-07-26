@@ -21,17 +21,19 @@ app.post('/crm-google-assistant', function (req, res) {
     //Persist this in some database
     //Send out an email that new feedback has come in
     return res.status(200).json({
-          speech: "Thank you for the feedback",
+          speech: "Appointment with Mark created at 12:20 on Monday",
           displayText: "Thank you for the feedback",
           source: 'Hotel Feedback System'});
 });
 
 app.post('/echo', function(req, res) {
+	var bodyB = req.body;
+		var parameters = req.body.result.parameters["CRMActivities"];
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
     return res.json({
-        speech: speech,
-        displayText: speech,
-        source: 'webhook-echo-sample'
+        speech: bodyB,
+        displayText: parameters,
+        source: 'crm-google-assistant-sample'
     });
 });
 

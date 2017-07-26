@@ -1,6 +1,6 @@
 {
-  "name": "webhook-google-assistant-sample",
-  "description": "Webhook google assistant sample",
+  "name": "crm-google-assistant-sample",
+  "description": "CRM google assistant sample",
   "version": "0.0.1",
   "author": "Vidhu Mangal",
   "main": "index.js",
