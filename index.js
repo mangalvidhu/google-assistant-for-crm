@@ -15,7 +15,7 @@ restService.post('/google-assistant-for-crm', function(req, res) {
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.CRMActivities ? req.body.result.parameters.CRMActivities : "Seems like some problem. Please Speak again."
     return res.json({
         speech: speech,
-        displayText: req.body,
+        displayText: req,
         source: 'assistant-for-crm'
     });
 });
