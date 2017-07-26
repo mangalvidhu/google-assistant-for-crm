@@ -1,8 +1,12 @@
 'use strict';
 
+process.env.DEBUG = 'actions-on-google:*';
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const App = require('actions-on-google').ApiAiApp;
+const functions = require('firebase-functions');
+
 
 const restService = express();
 
@@ -32,6 +36,10 @@ function addCard(app) {
 
 restService.post('/google-assistant-for-crm', function(req, res) {
 	var app = new App({req,res});
+	
+	console.log('Request headers: ' + JSON.stringify(req.headers));
+	console.log('Request body: ' + JSON.stringify(req.body));
+	
 	app.handleRequest(addCard);
 });
 
