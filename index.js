@@ -10,17 +10,29 @@ restService.use(bodyParser.urlencoded({ extended: false }));
 
 restService.use(bodyParser.json());
 
-function listTopicsIntent(app) {
-	GoogleIOAPI.getCategories().then(
-	categories =>
-	app.ask("The activities covered are: Appointment, task, call." +
-		"How so you want me to help you??")
-	)
+function addCard(app) {
+	
+	if(app.hasSurfaceCapability(
+	app.SurfaceCapabilities.SCREEN_OUTPUT)) {
+		
+		app.data.selectedSession = sessionData;
+			
+		app.ask(app.getIncomingRichResponse()
+			.addSimpleResponse("Appointment Created. Please find the details below.")
+			.addBasicCard(
+				app.buildBasicCard(sessionData.description)
+					.setTitle(sessionData.title)
+					.addButton('CRM Meeting Schedule', sessionData.url))
+			.addSimpleResponse("You want help with anything else?"));
+	} else {
+		app.ask("That's great");
+	}
+	
 }
 
 restService.post('/google-assistant-for-crm', function(req, res) {
 	var app = new App({req,res});
-	app.handleRequest(listTopicsIntent);
+	app.handleRequest(addCard);
 });
 
 restService.post('/slack-test', function(req, res) {
