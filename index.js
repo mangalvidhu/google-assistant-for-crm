@@ -13,7 +13,7 @@ restService.use(bodyParser.json());
 function listTopicsIntent(app) {
 	GoogleIOAPI.getCategories().then(
 	categories =>
-	app.ask("The activities covered are: ${CRMActivities}." +
+	app.ask("The activities covered are: Appointment, task, call." +
 		"How so you want me to help you??")
 	)
 }
