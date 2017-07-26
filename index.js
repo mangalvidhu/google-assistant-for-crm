@@ -5,9 +5,7 @@ const bodyParser = require('body-parser');
 
 const restService = express();
 
-restService.use(bodyParser.urlencoded({
-    extended: true
-}));
+restService.use(bodyParser.urlencoded());
 
 restService.use(bodyParser.json());
 
