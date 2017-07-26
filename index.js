@@ -27,12 +27,12 @@ app.post('/crm-google-assistant', function (req, res) {
 });
 
 app.post('/echo', function(req, res) {
+	var obj = JSON.parse(req);
 	var bodyB = req.body;
-		var parameters = req.body.result;
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
     return res.json({
         speech: bodyB,
-        displayText: parameters,
+        displayText: obj.result,
         source: 'crm-google-assistant-sample'
     });
 });
