@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 /* Handling all messenges */
 app.post('/crm-google-assistant', (req, res) => {
     console.log(req.body);
-    console.log(req.body.result.parameters["CRMActivities"]);
+    //console.log(req.body.result.parameters["CRMActivities"]);
     //Persist this in some database
     //Send out an email that new feedback has come in
     res.status(200).json({
@@ -26,6 +26,16 @@ app.post('/crm-google-assistant', (req, res) => {
           source: 'Hotel Feedback System'});
 });
 
-const server = app.listen(process.env.PORT || 5000, () => {
+restService.post('/echo', function(req, res) {
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+    return res.json({
+        speech: speech,
+        displayText: speech,
+        source: 'webhook-echo-sample'
+    });
+});
+
+
+const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
