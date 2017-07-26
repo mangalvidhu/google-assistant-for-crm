@@ -8,7 +8,14 @@
   },
   "author": "Vidhu Mangal",
   "dependencies": {
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+	"apiai": "^3.0.3",
+    "async": "^2.0.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.13.3",
+    "html-entities": "^1.2.0",
+    "json-bigint": "^0.2.0",
+    "node-uuid": "^1.4.7",
+    "request": "^2.73.0"
   }
 }

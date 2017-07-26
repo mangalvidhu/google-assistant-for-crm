@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const App = require('actions-on-google').ApiAiApp;
 
 const restService = express();
 
@@ -9,12 +10,17 @@ restService.use(bodyParser.urlencoded({ extended: false }));
 
 restService.use(bodyParser.json());
 
+function listTopicsIntent(app) {
+	GoogleIOAPI.getCategories().then(
+	categories =>
+	app.ask("The activities covered are: ${CRMActivities}." +
+		"How so you want me to help you??")
+	)
+}
+
 restService.post('/google-assistant-for-crm', function(req, res) {
-    return res.json({
-        speech: "Creating Appointment in CRM Dynamics",
-        displayText: "Appointment with Mark at 14:00:00",
-        source: 'assistant-for-crm'
-    });
+	var app = new App({req,res});
+	app.handleRequest(listTopicsIntent);
 });
 
 restService.post('/slack-test', function(req, res) {
