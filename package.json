@@ -3,20 +3,16 @@
   "description": "Webhook google assistant sample",
   "version": "0.0.1",
   "private": true,
-  "license": "Apache Version 2.0",
   "author": "Vidhu Mangal",
-  "engines": {
-    "node": "~6.0"
-  },
+  "main": "index.js",
   "scripts": {
-    "lint": "eslint --fix \"**/*.js\"",
-    "start": "firebase serve --only functions",
-    "deploy": "firebase deploy --only functions",
-    "test": "npm run lint"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "actions-on-google": "^1.0.0",
     "firebase-admin": "^4.2.1",
     "firebase-functions": "^0.5.7"
+	"body-parser": "^1.16.1",
+    "express": "^4.14.1"
   }
 }
