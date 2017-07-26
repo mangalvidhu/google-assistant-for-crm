@@ -28,7 +28,7 @@ app.post('/crm-google-assistant', function (req, res) {
 
 app.post('/echo', function(req, res) {
 	var bodyB = req.body;
-		var parameters = req.body.result.parameters["CRMActivities"];
+		var parameters = req.body.result;
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
     return res.json({
         speech: bodyB,
