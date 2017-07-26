@@ -1,12 +1,12 @@
 {
-  "name": "webhook-echo-sample",
+  "name": "webhook-google-assistant-sample",
   "version": "1.0.0",
-  "description": "Webhook echo sample",
+  "description": "Webhook google assistant sample",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Sunil Syal",
+  "author": "Vidhu Mangal",
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4"
