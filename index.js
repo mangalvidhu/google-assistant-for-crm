@@ -3,16 +3,14 @@
 process.env.DEBUG = 'actions-on-google:*';
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const App = require('actions-on-google').ApiAiApp;
 const functions = require('firebase-functions');
-
+const bodyParser = require('body-parser');
 
 const restService = express();
-
+restService.use(bodyParser.json());
 restService.use(bodyParser.urlencoded({ extended: false }));
 
-restService.use(bodyParser.json());
 
 function addCard(app) {
 	
@@ -40,8 +38,40 @@ restService.post('/google-assistant-for-crm', function(req, res) {
 	console.log('Request headers: ' + JSON.stringify(req.headers));
 	console.log('Request body: ' + JSON.stringify(req.body));
 	
-	app.handleRequest(addCard);
+	var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "Seems like some problem. Speak again."
+    return res.json({
+        speech: speech,
+        displayText: speech,
+        source: 'webhook-echo-sample'
+    });
+	
+	//app.handleRequest(addCard);
 });
+
+restService.get('/version', (req, res) => {
+    res.status(200).send("APIAI Webhook Integration. Version 1.0");
+});
+
+restService.get('/', (req, res) => {
+    res.status(200).send("Hello from APIAI Webhook Integration.");
+});
+
+/* Handling all messenges */
+restService.post('/assistant-for-crm', (req, res) => {
+    console.log(req.body);
+    console.log(req.body.result.parameters["CRMActivities"]);
+    //Persist this in some database
+    //Send out an email that new feedback has come in
+    res.status(200).json({
+          speech: "Thank you for the feedback",
+          displayText: "Thank you for the feedback",
+          source: 'CRMActivities Feedback System'});
+});
+
+const server = app.listen(process.env.PORT || 5000, () => {
+  console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
+});
+
 
 restService.post('/slack-test', function(req, res) {
 
