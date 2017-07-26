@@ -12,10 +12,11 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.post('/google-assistant-for-crm', function(req, res) {
+	var dT = req.body;
     var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.CRMActivities ? req.body.result.parameters.CRMActivities : "Seems like some problem. Please Speak again."
     return res.json({
         speech: speech,
-        displayText: req.body.result,
+        displayText: dT,
         source: 'assistant-for-crm'
     });
 });
